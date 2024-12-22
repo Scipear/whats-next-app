@@ -34,9 +34,8 @@ const styles = StyleSheet.create({
         width: 250,
         height: 55,
         borderRadius: 30,
-        justifyContent: 'center',
-        alignItems: 'center',
-        bottom: '25%'
+        bottom: '25%',
+        marginBottom: 10,
     },
 
     wrapperCustom:{
