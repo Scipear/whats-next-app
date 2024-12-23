@@ -31,8 +31,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     gradient: {
-        width: 250,
-        height: 55,
         borderRadius: 30,
         bottom: '25%',
         marginBottom: 10,
@@ -41,7 +39,6 @@ const styles = StyleSheet.create({
     wrapperCustom:{
         width: 250,
         height: 55,
-        borderRadius: 30,
         justifyContent: 'center',
         alignItems: 'center',
     }

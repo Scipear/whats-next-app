@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import Login from './screens/Login';
+import Register from './screens/Register';
 
 const Stack = createStackNavigator();
 
@@ -13,9 +14,14 @@ export default function App() {
             <Stack.Screen 
               name="Login" 
               component={Login} 
-              options={{
-                headerShown: false
-              }}/>
+              options={{headerShown: false}}
+              />
+            
+            <Stack.Screen 
+            name="Register" 
+            component={Register}
+            options={{headerShown: false}}
+            />
         </Stack.Navigator>
       </NavigationContainer>
   );
