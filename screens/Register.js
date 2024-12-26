@@ -1,15 +1,20 @@
+// ESTRUCTURAR Y ACOMODAR TODA ESTA PANTALLA EN COMPONENTES, ARREGLAR
+
 import {View, StyleSheet, ScrollView} from "react-native";
 import Text_Field from "../components/text_field";
+import { StatusBar } from "expo-status-bar";
 import Constants from 'expo-constants';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import SU_Button from "../components/sign_up_button";
-export default function Register(){
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+export default function Register({ navigation }){
     return(
-        <ScrollView contentContainerStyle={styles.container} style={{backgroundColor: '#ffffff', paddingTop: Constants.statusBarHeight,}}>
+        <ScrollView contentContainerStyle={styles.container} style={{backgroundColor: '#ffffff', paddingTop: Constants.statusBarHeight}}>
+            <StatusBar style="dark"/>
             <View style={styles.pictureHolder}>
-                <Ionicons name="person" size={100} color="black" />
+                <FontAwesome6 name="user-large" size={100} color="black" />
                 <View style={styles.cameraHolder}>
-                    <Ionicons name="camera" size={40} color="black"/>
+                    <FontAwesome6 name="camera" size={30} color="black" />
                 </View>
             </View>
 
@@ -21,8 +26,9 @@ export default function Register(){
                 <Text_Field text="Usuario" style={{width: '100%', }}/>
                 <Text_Field text="Correo Electronico" style={{width: '100%'}}/>
                 <Text_Field text="Contraseña" secure={true} style={{width: '100%'}}/>
+    
                 <View style={styles.buttonHolder}>
-                    <SU_Button name="Registrarse"/>
+                    <SU_Button name="Registrarse" onPress={() => navigation.navigate('Home')}/> 
                 </View>
             </View>
         </ScrollView>
@@ -48,30 +54,30 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: "center",
         shadowColor: '#000',
-        shadowOffset:{
+/*        shadowOffset:{
             width: 0,
             height: 2,
         },
         shadowOpacity: 0.25,
-        shadowRadius: 3.84,
+        shadowRadius: 3.84,*/
         elevation: 10,
     },
 
     pictureHolder:{
         width: 150,
         height: 150,
-        top:'20%',
+        top:'10%',
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 100,
         shadowColor: '#000',
-        shadowOffset:{
+/*        shadowOffset:{
             width: 0,
             height: 2,
         },
         shadowOpacity: 0.25,
-        shadowRadius: 3.84,
+        shadowRadius: 3.84, */
         elevation: 3,
     },
 
@@ -81,7 +87,7 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
         paddingRight: 20,
         //backgroundColor: '#ccc',
-        top: "28%",
+        top: "18%",
         //right: "10%",
         
     },

@@ -1,8 +1,10 @@
+//EN LO POSIBLE VER COMO SE PUEDE OPTIMIZAR ESTA PANTALLA
+
 import React, { useEffect, useRef, useState } from 'react';
 import Constants from 'expo-constants';
 import { Animated, View, Text, StyleSheet, Image, Pressable } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import Logo from "../components/icon";
+import  Logo  from "../components/icon";
 import SU_Button from "../components/sign_up_button";
 import BackBTN from '../components/back_button';
 import Text_Field from '../components/text_field';
@@ -46,7 +48,7 @@ export default function Login({ navigation }){
                         <Text_Field text="Usuario"/>
                         <Text_Field text="Contraseña" secure={true}/>
                         <View style={{marginTop:25}}>
-                            <SU_Button name="Iniciar Sesión"/>
+                            <SU_Button name="Iniciar Sesión" onPress={() => navigation.navigate('Home')}/>
                         </View>
                     </View>
                 )}

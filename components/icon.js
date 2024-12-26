@@ -1,5 +1,4 @@
 import { Image, View } from "react-native";
-import Constants from 'expo-constants';
 
 const icon = require('../assets/Logo.png');
 
