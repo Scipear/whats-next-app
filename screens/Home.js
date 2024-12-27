@@ -2,10 +2,10 @@ import {View, StyleSheet, Text, ScrollView} from 'react-native';
 import NewList from '../components/new_list';
 import Constants from 'expo-constants';
 
-export default function Home(){
+export default function Home({ navigation}){
     return(
         <ScrollView contentContainerStyle={styles.container} style={styles.template}>
-            <NewList />
+            <NewList onPress={() => navigation.navigate('Create List')}/>
         </ScrollView>
     );
 }

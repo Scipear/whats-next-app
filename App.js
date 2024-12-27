@@ -5,7 +5,11 @@ import { Pressable, StyleSheet} from 'react-native';
 import Login from './screens/Login';
 import Register from './screens/Register';
 import Home from './screens/Home';
-import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import CreateList from './screens/CreateList';
+import Profile from './screens/Profile';
+import Stats from './screens/Stats';
+import Profile_Button from './components/profile_button';
+import Stats_Button from './components/stats_button';
 import Constants from 'expo-constants';
 
 const Stack = createStackNavigator();
@@ -29,7 +33,7 @@ export default function App() {
             <Stack.Screen
               name="Home"
               component={Home}
-              options={{
+              options={({ navigation }) => ({
                 headerTitle: '',
                 headerBackground: () => (
                   <LinearGradient
@@ -39,16 +43,57 @@ export default function App() {
                     style={{ flex: 1 }}
                   />),
                 headerLeft: () => (
-                  <Pressable style={styles.profile}>
-                    <FontAwesome6 name="circle-user" size={35} color="black" />
-                  </Pressable>
+                  <Profile_Button onPress={() => navigation.navigate('Profile')}/>
                 ),
                 headerRight: () => (
-                  <Pressable style={styles.stats}>
-                    <FontAwesome6 name="chart-line" size={35} color="black" />
-                  </Pressable>
+                  <Stats_Button onPress={() => navigation.navigate('Stats')}/>
                 ),
-                }}
+              })}
+            />
+
+            <Stack.Screen
+             name="Create List"
+             component={CreateList}
+             options={{
+              headerTitle: '',
+              headerBackground: () => (
+                <LinearGradient
+                  colors={['#b45eff', '#8469ff', '#6490fe', '#4cacfd']} // Colores del degradado
+                  start={{ x: 1, y: 0 }}          // Comienza desde la izquierda
+                  end={{ x: 0, y: 0 }}
+                  style={{ flex: 1 }}
+                />),
+             }}
+            />
+
+            <Stack.Screen
+             name="Profile"
+             component={Profile}
+             options={{
+              headerTitle: '',
+              headerBackground: () => (
+                <LinearGradient
+                  colors={['#b45eff', '#8469ff', '#6490fe', '#4cacfd']} // Colores del degradado
+                  start={{ x: 1, y: 0 }}          // Comienza desde la izquierda
+                  end={{ x: 0, y: 0 }}
+                  style={{ flex: 1 }}
+                />),
+             }}
+            />
+
+            <Stack.Screen
+             name="Stats"
+             component={Stats}
+             options={{
+              headerTitle: '',
+              headerBackground: () => (
+                <LinearGradient
+                  colors={['#b45eff', '#8469ff', '#6490fe', '#4cacfd']} // Colores del degradado
+                  start={{ x: 1, y: 0 }}          // Comienza desde la izquierda
+                  end={{ x: 0, y: 0 }}
+                  style={{ flex: 1 }}
+                />),
+             }}
             />
 
 
@@ -65,19 +110,4 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
   },
 
-  profile:{
-    width: 50,
-    height: 50,
-    //position: 'absolute',
-    top: 5,
-    left: 15, // Distancia desde la izquierda
-  },
-
-  stats:{
-    width: 35,
-    height: 50,
-    //position: 'absolute',
-    top: 5,
-    right: 15, // Distancia desde la izquierda
-  }
 })

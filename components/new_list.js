@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Pressable } from 'react-native';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export default function NewList(){
+export default function NewList({ onPress }){
     return(
         <LinearGradient
             colors={['#b45eff', '#8469ff', '#6490fe', '#4cacfd']} // Colores del degradado
@@ -10,7 +10,7 @@ export default function NewList(){
             end={{ x: 0, y: 0 }}
             style={styles.gradient}            // Termina a la derecha
         >
-        <Pressable style={styles.container}>
+        <Pressable style={styles.container} onPress={onPress}>
             <View style={styles.button}>
                 <FontAwesome6 name="square-plus" size={125} color="black" />
             </View>
@@ -46,12 +46,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderRadius: 25,
         shadowColor: '#000',
-/*        shadowOffset:{
-            width: 0,
+/*      shadowOffset:{
+            width: 2,
             height: 2,
         },
         shadowOpacity: 0.25,
-        shadowRadius: 3.84, ios tristemente*/
+        shadowRadius: 5, solo ios q desgracia*/
         elevation: 5,
     },
 
