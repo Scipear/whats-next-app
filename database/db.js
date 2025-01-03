@@ -6,7 +6,7 @@ const username = process.env.USERNAME;
 const password = process.env.PASSWORD;
 const host = process.env.HOST;
 
-export const sequelize = new Sequelize('wnDB', 'postgres', 'Arrocopollo', {
+export const sequelize = new Sequelize('wnDB', 'postgres', 'mypassword', {
     host: 'localhost',
     dialect: 'postgres',
 
