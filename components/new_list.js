@@ -6,9 +6,9 @@ export default function NewList({ onPress }){
     return(
         <LinearGradient
             colors={['#b45eff', '#8469ff', '#6490fe', '#4cacfd']} // Colores del degradado
-            start={{ x: 1, y: 0 }}          // Comienza desde la izquierda
-            end={{ x: 0, y: 0 }}
-            style={styles.gradient}            // Termina a la derecha
+            start={{ x: 1, y: 0 }}  // Comienza desde la izquierda
+            end={{ x: 0, y: 0 }}    // Termina a la derecha
+            style={styles.gradient}            
         >
         <Pressable style={styles.container} onPress={onPress}>
             <View style={styles.button}>

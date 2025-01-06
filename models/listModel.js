@@ -25,7 +25,10 @@ export const List = sequelize.define( 'List', {
 
 }, {
     tableName: 'Lists',
+    timestamps: false,
 })
+
+// Relacion uno a muchos Lista-Elemento
 
 List.hasMany(Element, {
     foreignKey: 'listID',

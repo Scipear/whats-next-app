@@ -17,6 +17,7 @@ export const Category = sequelize.define( 'Category', {
     }
 }, {
     tableName: 'Categories',
+    timestamps: false,
 })
 
 Category.hasMany(List, {
@@ -28,6 +29,8 @@ List.belongsTo(Category, {
     foreignKey: 'categoryID',
     targetKey: 'ID',
 })
+
+// Relacion muchos a muchos Categoria-Campo. esta vaina fue un peo
 
 Category.belongsToMany(Field, { through: 'CategoryField' });
 Field.belongsToMany(Category, { through: 'CategoryField' });

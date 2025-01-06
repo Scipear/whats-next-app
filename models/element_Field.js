@@ -31,4 +31,5 @@ export const ElementField = sequelize.define( 'ElementField', {
     }
 }, {
     tableName: 'ElementField',
+    timestamps: false,
 })

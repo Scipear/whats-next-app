@@ -9,7 +9,7 @@ export const User = sequelize.define( 'User', {
         autoIncrement: true
     },
 
-    user:{
+    username:{
         type: DataTypes.STRING,
         unique: true,
         allowNull: false,
@@ -47,14 +47,17 @@ export const User = sequelize.define( 'User', {
     },
 
     creationDate:{
-        type: DataTypes.DATE,
+        type: DataTypes.DATE, // Cambiar a DATEONLY
         defaultValue: DataTypes.NOW,
     }
 
 }, {
     tableName: 'Users',
-    //timestamp: false (Por si acaso)
+    timestamps: false,
 })
+
+
+// Relacion de uno a muchos Usuario-Lista
 
 User.hasMany(List, {
     foreignKey: 'userID',

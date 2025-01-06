@@ -25,4 +25,7 @@ export const CategoryField = sequelize.define( 'CategoryField', {
             key: 'ID',
         }
     }
+}, {
+    tablename: 'CategoryField',
+    timestamps: false,
 })

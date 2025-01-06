@@ -19,4 +19,5 @@ export const Field = sequelize.define( 'Field', {
     }
 }, {
     tableName: 'Fields',
+    timestamps: false,
 })

@@ -46,7 +46,10 @@ export const Element = sequelize.define( 'Element', {
 
 }, {
     tableName: 'Elements',
+    timestamps: false,
 })
+
+// Relacion muchos a muchos Elemento-Campo
 
 Element.belongsToMany(Field, { through: 'ElementField' });
 Field.belongsToMany(Element, { through: 'ElementField' });
