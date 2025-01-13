@@ -13,6 +13,7 @@ export const Category = sequelize.define( 'Category', {
 
     name:{
         type: DataTypes.STRING,
+        unique: true,
         allowNull: false,
     }
 }, {
@@ -20,6 +21,7 @@ export const Category = sequelize.define( 'Category', {
     timestamps: false,
 })
 
+// Relacion uno a muchos Categoria-Lista.
 Category.hasMany(List, {
     foreignKey: 'categoryID',
     sourceKey: 'ID',

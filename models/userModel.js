@@ -3,16 +3,9 @@ import { sequelize } from "../database/db.js";
 import { List } from "./listModel.js";
 
 export const User = sequelize.define( 'User', {
-    ID:{
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-    },
-
     username:{
         type: DataTypes.STRING,
-        unique: true,
-        allowNull: false,
+        primaryKey: true,
     },
 
     mail:{
@@ -61,11 +54,11 @@ export const User = sequelize.define( 'User', {
 
 User.hasMany(List, {
     foreignKey: 'userID',
-    sourceKey: 'ID',
+    sourceKey: 'username',
 
 })
 
 List.belongsTo(User, {
     foreignKey: 'userID',
-    targetKey: 'ID',
+    targetKey: 'username',
 })

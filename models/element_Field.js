@@ -1,7 +1,5 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../database/db.js";
-import { Element } from "./elementModel.js";
-import { Field } from "./fieldModel.js";
 
 export const ElementField = sequelize.define( 'ElementField', {
     ID:{
