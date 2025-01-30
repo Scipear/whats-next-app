@@ -1,13 +1,49 @@
 // ESTRUCTURAR Y ACOMODAR TODA ESTA PANTALLA EN COMPONENTES, ARREGLAR
 
+import React, { useState } from 'react';
 import {View, StyleSheet, ScrollView} from "react-native";
 import Text_Field from "../components/text_field";
+import DateCalendar from "../components/dateCalendar";
 import { StatusBar } from "expo-status-bar";
 import Constants from 'expo-constants';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import SU_Button from "../components/sign_up_button";
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 export default function Register({ navigation }){
+    
+    const [username, setUsername] = useState('');
+    const [mail, setMail] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [birthDate, setBirthDate] = useState(new Date());
+
+    const handleLogin = async (username, mail, password, name, lastName, birthdayDate) => {
+        try{
+            const response = await fetch(`http://localhost:3000/register`, { //Cambiar el localhost por la IP en la que esta corriendo el front
+                method: 'POST', // Tipo de metodo HTTP
+                headers:{
+                    'Content-Type': 'application/json', // Tipo de documento que va a leer
+                },
+                body: JSON.stringify({ username, mail, password, name, lastName, birthDate }),
+            });
+    
+            const data = await response.json();
+    
+            if(response.ok){
+                console.log('Registro exitoso:', data);
+                navigation.navigate('Home'/*, { user: data.user }*/);
+            }else{
+                console.error('Error al registrar usuario:', data.message);
+                alert(data.message); 
+            }
+
+        }catch(error){
+            console.error(error.message);
+            alert('No se pudo conectar con el servidor.');
+        }
+    };
+
     return(
         <ScrollView contentContainerStyle={styles.container} style={{backgroundColor: '#ffffff', paddingTop: Constants.statusBarHeight}}>
             <StatusBar style="dark"/>
@@ -20,15 +56,16 @@ export default function Register({ navigation }){
 
             <View style={styles.textsHolder}>
                 <View style={styles.rowContainer}>
-                    <Text_Field text="Nombre" style={{width: '47%'}}/>
-                    <Text_Field text="Apellido" style={{width: '47%'}}/>
+                    <Text_Field text="Nombre" value={name} onChangeText={(value) => setName(value)} style={{width: '47%'}}/>
+                    <Text_Field text="Apellido" value={lastName} onChangeText={(value) => setLastName(value)} style={{width: '47%'}}/>
                 </View>
-                <Text_Field text="Usuario" style={{width: '100%', }}/>
-                <Text_Field text="Correo Electronico" style={{width: '100%'}}/>
-                <Text_Field text="Contraseña" secure={true} style={{width: '100%'}}/>
-    
+                <Text_Field text="Usuario" value={username} onChangeText={(value) => setUsername(value)} style={{width: '100%'}}/>
+                <Text_Field text="Correo Electronico" value={mail} onChangeText={(value) => setMail(value)} style={{width: '100%'}}/>
+                <Text_Field text="Contraseña" value={password} onChangeText={(value) => setPassword(value)} secure={true} style={{width: '100%'}}/>
+                <DateCalendar value={birthDate} onChange={setBirthDate}/>
+
                 <View style={styles.buttonHolder}>
-                    <SU_Button name="Registrarse" onPress={() => navigation.navigate('Home')}/> 
+                    <SU_Button name="Registrarse" onPress={() => handleLogin(username, mail, password, name, lastName, birthDate)}/> 
                 </View>
             </View>
         </ScrollView>

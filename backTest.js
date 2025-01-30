@@ -1,6 +1,7 @@
 import express from 'express';
 import { sequelize } from './database/db.js';
 import loginRoutes from './routes/loginRoutes.js';
+import registerRoutes from './routes/registerRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import listRoutes from './routes/listRoutes.js';
 import elementRoutes from './routes/elementRoutes.js';
@@ -11,6 +12,7 @@ import fieldRoutes from './routes/fieldRoutes.js';
 const app = express();
 app.use(express.json()); // necesario, es un middleware ni idea de que es
 app.use(loginRoutes);
+app.use(registerRoutes);
 app.use(userRoutes); // necesario
 app.use(listRoutes); // necesario
 app.use(elementRoutes);
