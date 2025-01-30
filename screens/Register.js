@@ -18,7 +18,7 @@ export default function Register({ navigation }){
     const [lastName, setLastName] = useState('');
     const [birthDate, setBirthDate] = useState(new Date());
 
-    const handleLogin = async (username, mail, password, name, lastName, birthdayDate) => {
+    const handleLogin = async (username, mail, password, name, lastName, birthDate) => {
         try{
             const response = await fetch(`http://localhost:3000/register`, { //Cambiar el localhost por la IP en la que esta corriendo el front
                 method: 'POST', // Tipo de metodo HTTP
