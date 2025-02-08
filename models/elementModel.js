@@ -1,13 +1,20 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../database/db.js";
-import { Field } from "./fieldModel.js";
-import { ElementField } from "./element_Field.js";
 
 export const Element = sequelize.define( 'Element', {
     ID:{
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
+    },
+
+    name:{
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+
+    description:{
+        type: DataTypes.TEXT,
     },
 
     status:{
@@ -48,8 +55,3 @@ export const Element = sequelize.define( 'Element', {
     tableName: 'Elements',
     timestamps: false,
 })
-
-// Relacion muchos a muchos Elemento-Campo
-
-Element.belongsToMany(Field, { through: 'ElementField' });
-Field.belongsToMany(Element, { through: 'ElementField' });
