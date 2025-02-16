@@ -8,14 +8,14 @@ export default function NewList({ onPress }){
             colors={['#b45eff', '#8469ff', '#6490fe', '#4cacfd']} // Colores del degradado
             start={{ x: 1, y: 0 }}  // Comienza desde la izquierda
             end={{ x: 0, y: 0 }}    // Termina a la derecha
-            style={styles.gradient}            
-        >
-        <Pressable style={styles.container} onPress={onPress}>
-            <View style={styles.button}>
-                <FontAwesome6 name="square-plus" size={125} color="black" />
-            </View>
-            <Text style={styles.title}>New List</Text>
-        </Pressable>
+            style={styles.gradient}>
+
+                <Pressable style={styles.container} onPress={onPress}>
+                    <View style={styles.button}>
+                        <FontAwesome6 name="square-plus" size={125} color="black" />
+                    </View>
+                    <Text style={styles.title}>New List</Text>
+                </Pressable>
         </LinearGradient>
     );
 }

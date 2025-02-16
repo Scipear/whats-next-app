@@ -1,7 +1,7 @@
 import { Pressable, StyleSheet } from 'react-native';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
-export default function Stats_Button({ onPress}){
+export default function Stats_Button({ onPress }){
     return(
         <Pressable style={styles.stats} onPress={onPress}>
             <FontAwesome6 name="chart-line" size={35} color="black" />

@@ -1,6 +1,6 @@
 import { View, StyleSheet, TextInput } from "react-native";
 
-export default function Text_Field({ text, secure, style, value, onChangeText }) {
+export default function Text_Field({ text, secure, style, value, onChangeText, multiline }) {
     return (
         <View style={[styles.textBox, style]}>
             <TextInput 
@@ -8,9 +8,9 @@ export default function Text_Field({ text, secure, style, value, onChangeText })
                 style={styles.text} 
                 secureTextEntry={secure} 
                 value={value}
-                onChangeText={onChangeText} 
-
-            />
+                onChangeText={onChangeText}
+                multiline={multiline}
+                textAlignVertical="top"/>
         </View>
     );
 }
@@ -23,11 +23,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#d0d3d4',
         //position: 'absolute',
         //bottom: '22%',
-        justifyContent: 'center',
+        //justifyContent: 'center',
         marginBottom: 10,
     },
 
     text:{
+        paddingTop: 12,
         paddingHorizontal: 15,
     }
 })
