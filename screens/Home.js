@@ -6,12 +6,13 @@ import Constants from 'expo-constants';
 import Text_Field from '../components/text_field';
 import SU_Button from "../components/sign_up_button";
 
-export default function Home({ navigation }){
+export default function Home({ navigation, route }){
 
+    const userID = route.params?.userID || null;
     const [modalVisible, setModalVisible] = useState(false);
     const [categories, setCategories] = useState([]);
-    const [selected, setSelected] = useState(false);
-    const [name, setName] = useState('');
+    const [selected, setSelected] = useState(null);
+    const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
 
     useEffect(() => {
@@ -31,8 +32,32 @@ export default function Home({ navigation }){
         getCategories();
     }, []);
 
-    const createList = async () => {
+    const createList = async (title, description, userID, categoryID) => {
+        try{
+            console.log(title, description, userID, categoryID);
+            const response = await fetch('http://localhost:3000/list', {
+                method: 'POST',
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({title, description, userID, categoryID}),
+            });
 
+            const data = await response.json();
+
+            if(response.ok){
+                console.log('Lista creada exitosamente', data);
+                alert('Lista creada exitosamente');
+                setModalVisible(!modalVisible);
+            }else{
+                console.error('Error al crear la lista:', data.message);
+                alert(data.message);
+            }
+
+        }catch(error){
+            console.error(error.message);
+            alert('No se pudo crear la lista');
+        }
     }
 
     return(
@@ -51,23 +76,23 @@ export default function Home({ navigation }){
                         style={styles.modalContainer}>
                     
                         <View style={styles.modalView}>
-                            <Text_Field text="Nombre"/>
+                            <Text_Field text="Nombre" value={title} onChangeText={(value) => setTitle(value)}/>
                             <Text style={styles.textStyle}>Categoría</Text>
-                            <Picker
-                                selectedValue={selected}
+                            <Picker 
+                                selectedValue={selected} 
                                 onValueChange={(itemValue) => 
-                                    setSelected(itemValue)
-                                }
-                                style={styles.pickerStyle}
-                            >
+                                    setSelected(itemValue)} 
+                                style={styles.pickerStyle}>
+                                
+                                <Picker.Item label="Seleccione una categoría" value={null} enabled={false} />
                                 {categories.map((category) =>
-                                    <Picker.Item key={category.id} label={category.name} value={category.id}/>
+                                    <Picker.Item key={category.ID} label={category.name} value={category.ID}/>
                                 )}
                                                     
                             </Picker>
-                            <Text_Field text="Descripcion" multiline={true} style={{height: 100}}/>
+                            <Text_Field text="Descripción" multiline={true} style={{height: 100}} value={description} onChangeText={(value) => setDescription(value)}/>
                             <View style={styles.buttonContainer}>
-                                <SU_Button name='Aceptar' onPress={() => setModalVisible(!modalVisible)}/>
+                                <SU_Button name='Aceptar' onPress={() => createList(title, description, userID, selected)}/>
                             </View>
                         </View>
                     </KeyboardAvoidingView>

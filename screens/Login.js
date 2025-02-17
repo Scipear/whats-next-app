@@ -31,7 +31,7 @@ export default function Login({ navigation }){
     
             if(response.ok){
                 console.log('Inicio de sesión exitoso:', data);
-                navigation.navigate('Home'/*, { user: data.user }*/);
+                navigation.navigate('Home', { userID: username });
             }else{
                 console.error('Error de inicio de sesión:', data.message);
                 alert(data.message); 

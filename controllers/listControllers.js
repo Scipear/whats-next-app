@@ -11,8 +11,8 @@ export const createList = async (req, res) => {
     try{
         const { title, description, userID, categoryID } = req.body;
 
-        if(!title){
-            return res.status(400).json({message: "Por favor ingrese un nombre para la lista."});
+        if(!title || !categoryID){
+            return res.status(400).json({message: "Por favor ingrese todos los campos obligatorios."});
         }
 
         const newList = await createNewList({title, description, userID, categoryID});
