@@ -14,6 +14,7 @@ export const createUser = async (req, res) => {
         const newUser = await createNewUser({username, mail, password, name, lastName, birthDate, picture}); // Se crea un nuevo usuario usando el modelo y los atributos obtenidos
 
         res.json(newUser); // Respuesta al usuario, en este caso se devuelve la entidad creada
+        
     }catch(error){
         return res.status(500).json({ message: error.message });
     }

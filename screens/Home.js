@@ -11,6 +11,8 @@ export default function Home({ navigation }){
     const [modalVisible, setModalVisible] = useState(false);
     const [categories, setCategories] = useState([]);
     const [selected, setSelected] = useState(false);
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
 
     useEffect(() => {
         const getCategories = async () => {
@@ -28,6 +30,10 @@ export default function Home({ navigation }){
 
         getCategories();
     }, []);
+
+    const createList = async () => {
+
+    }
 
     return(
         <ScrollView contentContainerStyle={styles.container} style={styles.template}>

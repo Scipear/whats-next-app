@@ -1,5 +1,6 @@
 import { List } from '../models/listModel.js';
 import { Element } from '../models/elementModel.js';
+import { createNewList, getList, getElements, deletingList } from '../services/listServices.js';
 
 /* Aqui ta complicao porque para tener los datos de los elementos de una lista esta contenida en 
     la tabla de elementField, entonces primero tiene que obtener el elemento y luego obtener los
@@ -10,12 +11,12 @@ export const createList = async (req, res) => {
     try{
         const { title, description, userID, categoryID } = req.body;
 
-        const newList = await List.create({
-            title,
-            description,
-            userID,
-            categoryID,
-        });
+        if(!title){
+            return res.status(400).json({message: "Por favor ingrese un nombre para la lista."});
+        }
+
+        const newList = await createNewList({title, description, userID, categoryID});
+
         res.json(newList);
 
     }catch(error){
@@ -36,7 +37,7 @@ export const getLists = async (req, res) => {
 export const getListbyID = async (req, res) => {
     try{
         const { ID } = req.params;
-        const list = await List.findByPk(ID);
+        const list = await getList(ID);
 
         res.json(list);
 
@@ -64,11 +65,7 @@ export const getListbyTitle = async (req, res) => {
 export const getListElements = async (req, res) => {
     try{
         const { ID } = req.params;
-        const elements = await Element.FindAll({
-            where:{
-                listID: ID,
-            }
-        });
+        const elements = await getElements(ID);
 
         res.json(elements);
         
@@ -80,7 +77,7 @@ export const getListElements = async (req, res) => {
 export const updateList = async (req, res) => {
     try{
         const { ID } = req.params;
-        const list = await List.findByPk(ID);
+        const list = await getList(ID);
         list.set(req.body);
         await list.save();
 
@@ -95,11 +92,7 @@ export const updateList = async (req, res) => {
 export const deleteList = async (req, res) => {
     try{
         const { ID } = req.params;
-        await List.destroy({
-            where:{
-                ID,
-            }
-        })
+        await deletingList(ID);
         res.sendStatus(204);
 
     }catch(error){
