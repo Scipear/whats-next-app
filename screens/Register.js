@@ -9,6 +9,8 @@ import Constants from 'expo-constants';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import SU_Button from "../components/sign_up_button";
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import { URL } from '../config/config';
+
 export default function Register({ navigation }){
     
     const [username, setUsername] = useState('');
@@ -20,7 +22,7 @@ export default function Register({ navigation }){
 
     const handleLogin = async (username, mail, password, name, lastName, birthDate) => {
         try{
-            const response = await fetch(`http://localhost:3000/register`, { //Cambiar el localhost por la IP en la que esta corriendo el front
+            const response = await fetch(`${URL}/register`, { //Cambiar el localhost por la IP en la que esta corriendo el front
                 method: 'POST', // Tipo de metodo HTTP
                 headers:{
                     'Content-Type': 'application/json', // Tipo de documento que va a leer

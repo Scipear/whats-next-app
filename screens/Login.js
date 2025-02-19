@@ -8,6 +8,7 @@ import  Logo  from "../components/icon";
 import SU_Button from "../components/sign_up_button";
 import BackBTN from '../components/back_button';
 import Text_Field from '../components/text_field';
+import { URL } from '../config/config';
 
 
 
@@ -19,7 +20,7 @@ export default function Login({ navigation }){
 
     const handleLogin = async (username, password) => {
         try{
-            const response = await fetch(`http://localhost:3000/login`, { //Cambiar el localhost por la IP en la que esta corriendo el front
+            const response = await fetch(`${URL}/login`, { //Cambiar el localhost por la IP en la que esta corriendo el front
                 method: 'POST', // Tipo de metodo HTTP
                 headers:{
                     'Content-Type': 'application/json', // Tipo de documento que va a leer

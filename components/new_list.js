@@ -23,9 +23,10 @@ export default function NewList({ onPress }){
 const styles = StyleSheet.create({
     container:{
         height: 150,
-        width: '90%',
+        width: '95%',
         backgroundColor: '#fff',
         alignItems: 'center',
+        //justifyContent: 'center',
         borderRadius: 25,
         margin: 8,
 /*        shadowOffset:{
@@ -66,6 +67,7 @@ const styles = StyleSheet.create({
         //height: 150,
         shadowColor: '#000',
         elevation: 5,
+        margin: 10
     },
 
 });

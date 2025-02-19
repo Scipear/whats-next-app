@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import {View, Modal, Text, StyleSheet, ScrollView, Platform, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import {View, Modal, Text, StyleSheet, ScrollView, Platform, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, FlatList} from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import NewList from '../components/new_list';
 import Constants from 'expo-constants';
 import Text_Field from '../components/text_field';
 import SU_Button from "../components/sign_up_button";
+import ListContainer from '../components/listContainer';
+import { URL } from '../config/config';
 
 export default function Home({ navigation, route }){
 
     const userID = route.params?.userID || null;
     const [modalVisible, setModalVisible] = useState(false);
     const [categories, setCategories] = useState([]);
+    const [lists, setLists] = useState([]);
     const [selected, setSelected] = useState(null);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -18,7 +21,7 @@ export default function Home({ navigation, route }){
     useEffect(() => {
         const getCategories = async () => {
             try{
-                const response = await fetch('http://localhost:3000/categories');
+                const response = await fetch(`${URL}/categories`);
                 const data = await response.json();
     
                 setCategories(data);
@@ -29,13 +32,26 @@ export default function Home({ navigation, route }){
             }
         };
 
+        const getLists = async () => {
+            try{
+                const response = await fetch(`${URL}/user/${userID}/lists`);
+                const data = await response.json();
+                
+                setLists(data);
+            }catch(error){
+                console.error(error.message);
+                alert('Error obteniendo las listas.');
+            }
+        }
+
         getCategories();
+        getLists();
     }, []);
 
     const createList = async (title, description, userID, categoryID) => {
         try{
             console.log(title, description, userID, categoryID);
-            const response = await fetch('http://localhost:3000/list', {
+            const response = await fetch(`${url}/list`, {
                 method: 'POST',
                 headers:{
                     'Content-Type': 'application/json'
@@ -48,6 +64,11 @@ export default function Home({ navigation, route }){
             if(response.ok){
                 console.log('Lista creada exitosamente', data);
                 alert('Lista creada exitosamente');
+
+                setLists((oldLists) => [...oldLists, data]);
+                setTitle('');
+                setDescription('');
+                setSelected(null);
                 setModalVisible(!modalVisible);
             }else{
                 console.error('Error al crear la lista:', data.message);
@@ -61,7 +82,7 @@ export default function Home({ navigation, route }){
     }
 
     return(
-        <ScrollView contentContainerStyle={styles.container} style={styles.template}>
+        <View contentContainerStyle={styles.container} style={styles.template}>
             <Modal
                 animationType="fade"
                 transparent={true}
@@ -100,7 +121,8 @@ export default function Home({ navigation, route }){
             </Modal>
             
             <NewList onPress={() => setModalVisible(true)}/>
-        </ScrollView>
+            <FlatList data={lists} keyExtractor={(list) => list.ID} renderItem={({ item }) => <ListContainer list={item} />}/>
+        </View>
     );
 }
 
