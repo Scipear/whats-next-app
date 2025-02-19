@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Pressable, Platform, StyleSheet, Text} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-export default function DateCalendar({value, onChange}){
+export default function DateCalendar({text, value, onChange}){
     const [show, setShow] = useState(false);
     const [selectedDate, setSelectedDate] = useState(null);
 
@@ -16,7 +16,7 @@ export default function DateCalendar({value, onChange}){
     return (
         <View style={styles.container}>
             <Pressable style={styles.button} onPress={() => setShow(true)}>
-                <Text>{ selectedDate ? selectedDate.toLocaleDateString() : "Fecha De Nacimiento" }</Text>
+                <Text>{ selectedDate ? selectedDate.toLocaleDateString() : text }</Text>
                 {show && (
                     <DateTimePicker
                         value={value}

@@ -6,7 +6,7 @@ const username = process.env.USERNAME;
 const password = process.env.PASSWORD;
 const host = process.env.HOST;
 
-export const sequelize = new Sequelize('wnDB', 'postgres', 'asdasd', { //DB NAME, DB USERNAME, DB PASSWORD, colocar manualmente
+export const sequelize = new Sequelize('wnDB', 'postgres', 'asd', { //DB NAME, DB USERNAME, DB PASSWORD, colocar manualmente
     host: 'localhost',
     dialect: 'postgres',
 

@@ -34,7 +34,7 @@ export default function Register({ navigation }){
     
             if(response.ok){
                 console.log('Registro exitoso:', data);
-                navigation.navigate('Home'/*, { user: data.user }*/);
+                navigation.navigate('Home', { userID: username });
             }else{
                 console.error('Error al registrar usuario:', data.message);
                 alert(data.message); 
@@ -64,7 +64,7 @@ export default function Register({ navigation }){
                 <Text_Field text="Usuario" value={username} onChangeText={(value) => setUsername(value)} style={{width: '100%'}}/>
                 <Text_Field text="Correo Electronico" value={mail} onChangeText={(value) => setMail(value)} style={{width: '100%'}}/>
                 <Text_Field text="Contraseña" value={password} onChangeText={(value) => setPassword(value)} secure={true} style={{width: '100%'}}/>
-                <DateCalendar value={birthDate} onChange={setBirthDate}/>
+                <DateCalendar text="Fecha de Nacimiento" value={birthDate} onChange={setBirthDate}/>
 
                 <View style={styles.buttonHolder}>
                     <SU_Button name="Registrarse" onPress={() => handleLogin(username, mail, password, name, lastName, birthDate)}/> 

@@ -23,24 +23,23 @@ export default function NewList({ onPress }){
 const styles = StyleSheet.create({
     container:{
         height: 150,
-        width: '95%',
+        width: '100%',
         backgroundColor: '#fff',
         alignItems: 'center',
         //justifyContent: 'center',
         borderRadius: 25,
         margin: 8,
-/*        shadowOffset:{
+        /*shadowOffset:{
             width: 0,
             height: 2,
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,*/
         flexDirection: 'row',
-
     },
 
     button:{
-        width: '50%',
+        width: '45%',
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
@@ -60,14 +59,15 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 30,
         padding: 10,
+        margin: 10,
     },
 
     gradient:{
         borderRadius: 32,
         //height: 150,
-        shadowColor: '#000',
-        elevation: 5,
-        margin: 10
+        //shadowColor: '#000',
+        //elevation: 5,
+        //margin: 10
     },
 
 });

@@ -51,7 +51,7 @@ export default function Home({ navigation, route }){
     const createList = async (title, description, userID, categoryID) => {
         try{
             console.log(title, description, userID, categoryID);
-            const response = await fetch(`${url}/list`, {
+            const response = await fetch(`${URL}/list`, {
                 method: 'POST',
                 headers:{
                     'Content-Type': 'application/json'
@@ -65,7 +65,10 @@ export default function Home({ navigation, route }){
                 console.log('Lista creada exitosamente', data);
                 alert('Lista creada exitosamente');
 
-                setLists((oldLists) => [...oldLists, data]);
+                if(lists){
+                    setLists((oldLists) => [...oldLists, data]);
+                }
+
                 setTitle('');
                 setDescription('');
                 setSelected(null);
@@ -82,7 +85,7 @@ export default function Home({ navigation, route }){
     }
 
     return(
-        <View contentContainerStyle={styles.container} style={styles.template}>
+        <View style={styles.template}>
             <Modal
                 animationType="fade"
                 transparent={true}
@@ -121,16 +124,25 @@ export default function Home({ navigation, route }){
             </Modal>
             
             <NewList onPress={() => setModalVisible(true)}/>
-            <FlatList data={lists} keyExtractor={(list) => list.ID} renderItem={({ item }) => <ListContainer list={item} />}/>
+            <FlatList 
+                data={lists} 
+                keyExtractor={(list) => list.ID} 
+                renderItem={({ item }) => 
+                    <ListContainer 
+                        list={item} 
+                        onPress={() => navigation.navigate('ListView', { list: item })}/>
+                }/>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    container:{
-        flexGrow: 1, // Asegura que el contenido ocupe todo el espacio disponible
+    template:{
+        flex: 1, // Asegura que el contenido ocupe todo el espacio disponible
         //justifyContent: "center", // Centra los elementos verticalmente
         alignItems: "center", // Centra los elementos horizontalmente
+        backgroundColor: '#fff',
+        paddingTop: 20, // Agrega la altura de la barra de estado al contenido	        
     },
 
     modalContainer:{
@@ -152,7 +164,7 @@ const styles = StyleSheet.create({
         minHeight: 350,
         height: '50%',
         //margin: 20,
-        backgroundColor: 'white',
+        backgroundColor: '#fff',
         borderRadius: 20,
         padding: 10,
         //alignItems: 'center',
@@ -163,11 +175,6 @@ const styles = StyleSheet.create({
     textStyle:{
         fontSize: 20,
         marginTop: 10,
-    },
-
-    template:{
-        backgroundColor: '#fff',
-        paddingTop: Constants.statusBarHeight, // Agrega la altura de la barra de estado al contenido	        
     },
 
     buttonContainer:{

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Pressable, StyleSheet } from "react-native";
 import { URL } from "../config/config";
 
-export default function ListContainer({ list }){
+export default function ListContainer({ list, onPress }){
     const [category, setCategory] = useState('');
 
     useEffect(() => {
@@ -21,10 +21,29 @@ export default function ListContainer({ list }){
         getCategory();
     }, []);
     return (
-        <View key={list.ID}>
-            <Text>{list.title}</Text>
-            <Text>{category}</Text>
-            <Text>{list.description}</Text>
+        <View key={list.ID} style={styles.container}>
+            <Pressable style={styles.listButton} onPress={onPress}>
+                <Text>{list.title}</Text>
+                <Text>{category}</Text>
+                <Text>{list.description}</Text>
+            </Pressable>
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    container:{
+        padding: 5,
+    },
+
+    listButton:{
+        width: 300,
+        padding: 10,
+        borderRadius: 25,
+        marginTop: 5,
+        backgroundColor: '#fff',
+        shadowColor: '#000',
+        elevation: 5,
+
+    }
+});
