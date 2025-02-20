@@ -1,4 +1,5 @@
 import { Element } from '../models/elementModel.js';
+import { createNewElement, deletingElement, getElement } from '../services/elementServices.js';
 
 export const getElements = async (req, res) => {
     try{
@@ -13,7 +14,7 @@ export const getElements = async (req, res) => {
 export const getElementByID = async (req, res) => {
     try{
         const { ID } = req.params;
-        const element = await Element.findByPk(ID);
+        const element = await getElement(ID);
 
         res.json(element);
 
@@ -24,10 +25,12 @@ export const getElementByID = async (req, res) => {
 
 export const createElement = async (req, res) => {
     try{
-        const { expectedDate, listID } = req.body;
-        const newElement = Element.create({
-            expectedDate,
-        });
+        const { name, description, expectedDate, listID } = req.body;
+
+        if(!name || !description || !expectedDate){
+            return res.status(400).json({message: "Por favor rellene todos los campos para crear el elemento."});
+        }
+        const newElement = await createNewElement({ name, description, expectedDate, listID });
 
         res.json(newElement);
     }catch(error){
@@ -38,7 +41,7 @@ export const createElement = async (req, res) => {
 export const updateElement = async (req, res) => {
     try{
         const { ID } = req.params;
-        const element = await Element.findByPk(ID);
+        const element = await getElement(ID);
         element.set(req.body);
         await element.save();
 
@@ -52,13 +55,7 @@ export const updateElement = async (req, res) => {
 export const deleteElement = async (req, res) => {
     try{
         const { ID } = req.params;
-
-        await Element.destoy({
-            where:{
-                ID,
-            }
-        });
-
+        await deletingElement(ID);
         res.sendStatus(204);
         
     }catch(error){

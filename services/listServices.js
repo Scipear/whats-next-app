@@ -1,5 +1,6 @@
 import { List } from "../models/listModel.js";
 import { Element } from "../models/elementModel.js";
+import { Op } from "sequelize";
 
 export const createNewList = async (listData) => {
     try{
@@ -42,7 +43,7 @@ export const getElements = async (listID) => {
 
         const elements = await Element.findAll({
             where:{
-                listID,
+                [Op.and]: [{ listID: listID }, { status: false }]
             }
         });
 
