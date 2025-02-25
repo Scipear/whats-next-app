@@ -18,7 +18,7 @@ app.use(elementRoutes);
 app.use(categoryRoutes);
 
     try{
-        await sequelize.sync({ force: false}); // Crea las tablas en la base de datos a partir de los modelos importados
+        await sequelize.sync({ force: true}); // Crea las tablas en la base de datos a partir de los modelos importados
         console.log('Sync successfully.');
         app.listen(process.env.PORT); // Creo que abre el puerto i dont really know
         console.log('Listening on port ', process.env.PORT);

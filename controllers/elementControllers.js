@@ -1,5 +1,5 @@
 import { Element } from '../models/elementModel.js';
-import { createNewElement, deletingElement, getElement } from '../services/elementServices.js';
+import { createNewElement, deletingElement, getElement, activitiesPerDay } from '../services/elementServices.js';
 
 export const getElements = async (req, res) => {
     try{
@@ -17,6 +17,18 @@ export const getElementByID = async (req, res) => {
         const element = await getElement(ID);
 
         res.json(element);
+
+    }catch(error){
+        return res.status(500).json({message: error.message});
+    }
+}
+
+export const getElementsDone = async (req, res) => {
+    try{
+        const { culminationDate } = req.params;
+        const count = await activitiesPerDay(culminationDate);
+
+        res.json({count});
 
     }catch(error){
         return res.status(500).json({message: error.message});

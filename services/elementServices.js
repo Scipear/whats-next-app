@@ -1,4 +1,5 @@
 import { Element } from "../models/elementModel.js";
+import { Op } from "sequelize";
 
 export const createNewElement = async (elementData) =>{
     try{
@@ -44,6 +45,21 @@ export const deletingElement = async (elementID) => {
             }
         });
 
+    }catch(error){
+        throw error;
+    }
+}
+
+export const activitiesPerDay = async (date) => {
+    try{
+        const activities = await Element.count({
+            where:{
+                culminationDate: date,
+            }
+
+        })
+
+        return activities;
     }catch(error){
         throw error;
     }

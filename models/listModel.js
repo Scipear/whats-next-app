@@ -19,7 +19,7 @@ export const List = sequelize.define( 'List', {
     },
 
     creationDate:{
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         defaultValue: DataTypes.NOW,
     }
 

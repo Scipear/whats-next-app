@@ -23,25 +23,20 @@ export const Element = sequelize.define( 'Element', {
     },
 
     additionDate:{
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         defaultValue: DataTypes.NOW,
     },
 
     expectedDate:{
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
     },
 
     culminationDate:{
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
     },
 
     punctuality:{
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-    },
-
-    outOfOrder:{
         type: DataTypes.BOOLEAN,
         defaultValue: false,
     },
