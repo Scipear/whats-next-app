@@ -27,7 +27,7 @@ export const createElement = async (req, res) => {
     try{
         const { name, description, expectedDate, listID } = req.body;
 
-        if(!name || !description || !expectedDate){
+        if(!name || !expectedDate){
             return res.status(400).json({message: "Por favor rellene todos los campos para crear el elemento."});
         }
         const newElement = await createNewElement({ name, description, expectedDate, listID });
@@ -42,7 +42,8 @@ export const updateElement = async (req, res) => {
     try{
         const { ID } = req.params;
         const element = await getElement(ID);
-        element.set(req.body);
+        Object.assign(element, req.body);
+        //element.set(req.body);
         await element.save();
 
         res.json(element);
