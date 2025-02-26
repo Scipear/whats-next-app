@@ -12,9 +12,9 @@ export default function NewList({ onPress }){
 
                 <Pressable style={styles.container} onPress={onPress}>
                     <View style={styles.button}>
-                        <FontAwesome6 name="square-plus" size={125} color="black" />
+                        <FontAwesome6 name="square-plus" size={75} color="#3c3a55" />
                     </View>
-                    <Text style={styles.title}>New List</Text>
+                    <Text style={styles.title}>Nueva Lista</Text>
                 </Pressable>
         </LinearGradient>
     );
@@ -22,12 +22,12 @@ export default function NewList({ onPress }){
 
 const styles = StyleSheet.create({
     container:{
-        height: 150,
-        width: '100%',
+        height: 100,
+        width: '70%',
         backgroundColor: '#fff',
         alignItems: 'center',
         //justifyContent: 'center',
-        borderRadius: 25,
+        borderRadius: 20,
         margin: 8,
         /*shadowOffset:{
             width: 0,
@@ -39,12 +39,12 @@ const styles = StyleSheet.create({
     },
 
     button:{
-        width: '45%',
+        width: '40%',
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#fff',
-        borderRadius: 25,
+        borderRadius: 20,
         shadowColor: '#000',
 /*      shadowOffset:{
             width: 2,
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 5, solo ios q desgracia*/
-        elevation: 5,
+        elevation: 4,
     },
 
     title:{
@@ -60,13 +60,15 @@ const styles = StyleSheet.create({
         fontSize: 30,
         padding: 10,
         margin: 10,
+        color: '#3c3a55',
     },
 
     gradient:{
-        borderRadius: 32,
+        borderRadius: 25,
+        marginBottom: 10,
         //height: 150,
-        //shadowColor: '#000',
-        //elevation: 5,
+        shadowColor: '#000',
+        elevation: 10,
         //margin: 10
     },
 

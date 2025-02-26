@@ -95,9 +95,12 @@ export default function ListView({ route }) {
                     </KeyboardAvoidingView>
                 </TouchableWithoutFeedback>
             </Modal>
-            <Text style={styles.title}>{listTitle}</Text>
-            <View>
-                <SU_Button name='New Element' onPress={() => setModalVisible(true)}/>
+            <View style={styles.titleContainer}>
+                <Text style={styles.title}>{listTitle}</Text>
+            </View>
+
+            <View style={styles.buttonNewElement}>
+                <SU_Button name='Nueva Actividad' onPress={() => setModalVisible(true)}/>
             </View>
 
             <FlatList 
@@ -120,10 +123,30 @@ const styles= StyleSheet.create({
         alignItems: 'center',
     },
 
-    title:{
-        fontSize: 24,
-        fontWeight: 'bold',
+    titleContainer:{
         marginBottom: 20,
+        padding: 5,
+        paddingTop: 20,
+        paddingLeft: 20,
+        paddingRight: 20,
+        borderBottomStartRadius: 50,
+        borderBottomEndRadius: 50,
+        backgroundColor: '#fff',
+        shadowColor: '#000',
+        elevation: 7,
+    },
+
+    title:{
+        fontSize: 30,
+        fontWeight: 'bold',
+        //marginBottom: 20,
+        padding: 15,
+        color: '#3c3a55',
+    },
+
+    buttonNewElement:{
+        marginTop: 10,
+        //marginBottom: 20,
     },
     
     modalContainer:{

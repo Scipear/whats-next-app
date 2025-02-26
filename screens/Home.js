@@ -112,7 +112,7 @@ export default function Home({ navigation, route }){
                                 {categories.map((category) =>
                                     <Picker.Item key={category.ID} label={category.name} value={category.ID}/>
                                 )}
-                                                    
+                                   
                             </Picker>
                             <Text_Field text="Descripción" multiline={true} style={{height: 100}} value={description} onChangeText={(value) => setDescription(value)}/>
                             <View style={styles.buttonContainer}>

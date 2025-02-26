@@ -78,10 +78,11 @@ export default function ElementContainer({ element, updateList }){
     return (
         <View key={element.ID} style={styles.container}>
             <Pressable style={styles.listButton} onPress={() => completeActivity()}>
-                <Text>{element.name}</Text>
-                <Text>{element.description}</Text>
-                <Text>Fecha deseada para completar: {formatDate(element.expectedDate)}</Text>
-                <Text>Días que faltan para cumplir: {daysUntil(element.expectedDate)}</Text>
+                <Text style={styles.title}>{element.name}</Text>
+                <Text style={styles.description}>{element.description}</Text>
+                <Text style={{fontWeight: 'bold'}}>Fecha ingresada: {element.additionDate}</Text>
+                <Text style={{fontWeight: 'bold'}}>Fecha para completar: {element.expectedDate}</Text>
+                <Text style={{fontWeight: 'bold'}}>Días que faltan para cumplir: {daysUntil(element.expectedDate)}</Text>
             </Pressable>
         </View>
     );
@@ -93,13 +94,25 @@ const styles = StyleSheet.create({
     },
 
     listButton:{
-        width: 300,
+        width: 320,
         padding: 10,
-        borderRadius: 25,
-        marginTop: 5,
+        borderRadius: 10,
+        //marginTop: 5,
         backgroundColor: '#fff',
         shadowColor: '#000',
-        elevation: 5,
+        elevation: 2,
+    },
+    
+    title:{
+        fontSize: 25,
+        fontWeight: 'bold',
+        marginBottom: 10,
+        color: '#3c3a55',
+    },
 
+    description:{
+        fontSize: 17,
+        marginBottom: 10,
+        color: '#413f54',
     }
 });

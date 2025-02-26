@@ -33,26 +33,7 @@ export default function Stats(){
     
 
     useEffect(() => {
-        /*const asignarArray = async () => {
-            let newArray = []; // Array temporal para evitar problemas con `setState`
         
-            for (let i = 0; i < 28; i++) {
-                const formattedDate = new Date(year, month - 1, i + 1).toISOString().split('T')[0];
-                console.log("Fecha consultada:", formattedDate); // Verifica que la fecha cambia en cada iteración
-                
-                try {
-                    const count = await getActivities(formattedDate);
-                    newArray.push(count); // Agregar el resultado al array temporal
-                } catch (error) {
-                    console.error(`Error obteniendo datos para ${formattedDate}:`, error);
-                    newArray.push(0); // En caso de error, agregar un valor por defecto
-                }
-            }
-
-            setArray(newArray); // Actualizar el estado solo una vez al final del bucle
-        }
-
-        asignarArray();*/
         const fetchData = async () => {
             let newArray = []; // Array temporal para evitar problemas con `setState`
         
@@ -69,15 +50,7 @@ export default function Stats(){
                 }
             }
 
-            setChartData(newArray); // Actualizar el estado solo una vez al final del bucle
-            /*const newData = await Promise.all(
-                Array.from({ length: 28 }, async (_, i) => {
-                    const formattedDate = new Date(year, month - 1, i + 1).toISOString().split('T')[0];
-                    const count = await getActivities(formattedDate);
-                    return Number.isFinite(count) ? count : 0; // Validar que sea un número
-                })
-            );
-            setChartData(newData);*/
+            setChartData(newArray);
         };
 
         fetchData();
@@ -90,7 +63,11 @@ export default function Stats(){
     const ykey = xkey.map(() => Math.random() * 100);
     
     if (chartData.length < 27) {
-        return <Text>Loading...</Text>; // Mostrar un mensaje mientras los datos están siendo cargados
+        return (
+            <View style={styles.container}>
+                <Text>Cargando...</Text>
+            </View>
+        ); // Mostrar un mensaje mientras los datos están siendo cargados
     }
 
     const data = {
@@ -109,18 +86,19 @@ export default function Stats(){
     return(
         <View style={styles.container}>
             <View style={styles.monthStatistics}>
-                <Text style={styles.title}>FEBRERO</Text>
                 <Text style={styles.title}>TAREAS REALIZADAS</Text>
-                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            </View>
+                <Text style={styles.month}>FEBRERO</Text>
+                <ScrollView style={styles.graphContainer} horizontal showsHorizontalScrollIndicator={false}>
                     <LineChart
                         data={data}
                         width={Dimensions.get("window").width * 2} // from react-native
                         height={220}
                         yAxisInterval={1} // optional, defaults to 1
                         chartConfig={{
-                            backgroundColor: "#e26a00",
-                            backgroundGradientFrom: "#fb8c00",
-                            backgroundGradientTo: "#ffa726",
+                            backgroundColor: "#b45eff",
+                            backgroundGradientFrom: "#8469ff",
+                            backgroundGradientTo: "#4cacfd",
                             decimalPlaces: 0, // optional, defaults to 2dp
                             fromZero: true,
                             color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
@@ -129,19 +107,17 @@ export default function Stats(){
                                 borderRadius: 16
                             },
                             propsForDots: {
-                                r: "6",
-                                strokeWidth: "3",
-                                stroke: "#ffa726"
+                                r: "4",
+                                strokeWidth: "1",
+                                stroke: "#fff"
                             },
                         }}
-                        bezier
                         style={{
                             marginVertical: 8,
                             borderRadius: 16
                         }}
                     />
                 </ScrollView>
-            </View>
         </View>
     );
 }
@@ -154,16 +130,36 @@ styles = StyleSheet.create({
     },
 
     monthStatistics:{
-        alignItems: 'center',
-        marginTop: 20,
-        padding: 10,
-        backgroundColor: '#f2f2f2',
-        borderRadius: 20,
+        marginBottom: 20,
+        padding: 5,
+        paddingTop: 20,
+        paddingLeft: 20,
+        paddingRight: 20,
+        borderBottomStartRadius: 50,
+        borderBottomEndRadius: 50,
+        backgroundColor: '#fff',
+        shadowColor: '#000',
+        elevation: 7,
     },
 
     title:{
-        fontSize: 24,
+        fontSize: 30,
         fontWeight: 'bold',
-        marginBottom: 20,
+        //marginBottom: 20,
+        padding: 10,
+        color: '#3c3a55',
     },
+
+    month:{
+        fontSize: 30,
+        fontWeight: 'bold',
+        marginTop: 10,
+        color: '#3c3a55',
+    },
+
+    graphContainer:{
+        marginLeft: 10,
+        marginRight: 10,
+        borderRadius: 10,
+    }
 })

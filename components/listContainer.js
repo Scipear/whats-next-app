@@ -23,9 +23,9 @@ export default function ListContainer({ list, onPress }){
     return (
         <View key={list.ID} style={styles.container}>
             <Pressable style={styles.listButton} onPress={onPress}>
-                <Text>{list.title}</Text>
-                <Text>{category}</Text>
-                <Text>{list.description}</Text>
+                <Text style={styles.title}>{list.title}</Text>
+                <Text style={styles.categoryText}>Categoría: {category}</Text>
+                <Text style={styles.description}>{list.description}</Text>
             </Pressable>
         </View>
     );
@@ -36,10 +36,27 @@ const styles = StyleSheet.create({
         padding: 5,
     },
 
+    title:{
+        fontSize: 22,
+        fontWeight: 'bold',
+        color: '#3c3a55',
+    },
+
+    categoryText:{
+        marginBottom: 22,
+        color: '#413f54',
+    },
+
+    description:{
+        fontSize: 17,
+        marginBottom: 5,
+        color: '#413f54',
+    },
+
     listButton:{
-        width: 300,
+        width: 320,
         padding: 10,
-        borderRadius: 25,
+        borderRadius: 20,
         marginTop: 5,
         backgroundColor: '#fff',
         shadowColor: '#000',
